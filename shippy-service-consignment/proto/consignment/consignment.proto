@@ -2,6 +2,8 @@ syntax = "proto3";
 
 package consignment; 
 
+// option go_package = "github.com/protodev/microservice/consignment;consignment";
+
 service ShippingService {
   rpc CreateConsignment(Consignment) returns (Response) {}
 }
