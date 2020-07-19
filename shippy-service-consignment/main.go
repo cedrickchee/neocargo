@@ -5,7 +5,7 @@ import (
 	"log"
 
 	// Import the generated protobuf code
-	pb "github.com/protodev/shippy/shippy-service-consignment/proto/consignment"
+	pb "github.com/haxorbit/shippy/shippy-service-consignment/proto/consignment"
 
 	"github.com/micro/go-micro/v2"
 )
