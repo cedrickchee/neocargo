@@ -11,6 +11,7 @@ import (
 
 // Datastore models
 
+// Consignment model
 type Consignment struct {
 	ID          string     `json:"id"`
 	Weight      int32      `json:"weight"`
@@ -19,12 +20,14 @@ type Consignment struct {
 	VesselID    string     `json:"vessel_id"`
 }
 
+// Container model
 type Container struct {
 	ID         string `json:"id"`
 	CustomerID string `json:"customer_id"`
 	UserID     string `json:"user_id"`
 }
 
+// Containers is a list of shipping container
 type Containers []*Container
 
 // Marshalling and unmarshalling functions
@@ -39,6 +42,7 @@ type Containers []*Container
 // It may seem like additional overhead, but this is important for the
 // extensibility of your software.
 
+// MarshalContainerCollection ...
 func MarshalContainerCollection(containers []*pb.Container) []*Container {
 	collection := make([]*Container, 0)
 	for _, container := range containers {
@@ -47,6 +51,7 @@ func MarshalContainerCollection(containers []*pb.Container) []*Container {
 	return collection
 }
 
+// UnmarshalContainerCollection ...
 func UnmarshalContainerCollection(containers []*Container) []*pb.Container {
 	collection := make([]*pb.Container, 0)
 	for _, container := range containers {
@@ -55,6 +60,7 @@ func UnmarshalContainerCollection(containers []*Container) []*pb.Container {
 	return collection
 }
 
+// UnmarshalConsignmentCollection ...
 func UnmarshalConsignmentCollection(consignments []*Consignment) []*pb.Consignment {
 	collection := make([]*pb.Consignment, 0)
 	for _, consignment := range consignments {
@@ -63,6 +69,7 @@ func UnmarshalConsignmentCollection(consignments []*Consignment) []*pb.Consignme
 	return collection
 }
 
+// UnmarshalContainer ...
 func UnmarshalContainer(container *Container) *pb.Container {
 	return &pb.Container{
 		Id:         container.ID,
@@ -71,6 +78,7 @@ func UnmarshalContainer(container *Container) *pb.Container {
 	}
 }
 
+// MarshalContainer ...
 func MarshalContainer(container *pb.Container) *Container {
 	return &Container{
 		ID:         container.Id,
@@ -79,7 +87,7 @@ func MarshalContainer(container *pb.Container) *Container {
 	}
 }
 
-// Marshal an input consignment type to a consignment model
+// MarshalConsignment marshals an input consignment type to a consignment model
 func MarshalConsignment(consignment *pb.Consignment) *Consignment {
 	containers := MarshalContainerCollection(consignment.Containers)
 	return &Consignment{
@@ -91,6 +99,7 @@ func MarshalConsignment(consignment *pb.Consignment) *Consignment {
 	}
 }
 
+// UnmarshalConsignment ...
 func UnmarshalConsignment(consignment *Consignment) *pb.Consignment {
 	return &pb.Consignment{
 		Id:          consignment.ID,
