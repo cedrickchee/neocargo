@@ -23,7 +23,7 @@ COPY . .
 
 RUN go mod download
 # Build binary
-RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o shippy-service-consignment
+RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o shippy-service-consignment *.go
 
 # Run container
 # Take the binary from build container and then run binary,
