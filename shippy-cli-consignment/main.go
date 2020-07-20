@@ -49,7 +49,7 @@ func main() {
 
 	r, err := client.CreateConsignment(context.Background(), consignment)
 	if err != nil {
-		log.Fatalf("Could not greet: %v", err)
+		log.Fatalf("Could not create a consignment: %v", err)
 	}
 	log.Printf("Created: %t", r.Created)
 
