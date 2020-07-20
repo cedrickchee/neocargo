@@ -1,5 +1,5 @@
 build:
-	protoc -I. --go_out=plugins=micro:. \
+	protoc --proto_path=. --go_out=. --micro_out=. \
 		--go_opt=paths=source_relative \
 		proto/consignment/consignment.proto
 	GOOS=linux GOARCH=amd64 go build -o shippy-service-consignment && \
