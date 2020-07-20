@@ -16,3 +16,6 @@
 
 # Data
 data
+
+# Environment variables and program configurations
+*.env
