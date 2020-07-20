@@ -32,3 +32,37 @@ The Shippy backend consists of 3 microservices:
 - Install gRPC / protobuf
 - Install Go libraries:
     - [protoc-gen-go](https://pkg.go.dev/github.com/golang/protobuf/protoc-gen-go): The protoc-gen-go binary is a protoc plugin to generate a Go protocol buffer package.
+
+## Usage
+
+### Build and Run Docker Compose Stack
+
+I created a simple Makefile to build, run, test, and teardown Docker Compose
+stack in local development machine.
+
+Just run in project root:
+
+```sh
+# Build stack
+$ make build
+
+# Run stack
+$ make run
+```
+
+You can stop all of your current containers by running:
+
+```sh
+# Teardown stack
+$ make stop
+```
+
+### Testing
+
+Test it all by running our CLI tool.
+
+To run it through docker-compose, run:
+
+```sh
+$ make run-cli
+```
