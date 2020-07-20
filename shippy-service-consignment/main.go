@@ -100,7 +100,7 @@ func main() {
 	// vesselService := micro.NewService(micro.Name("shippy.service.vessel"))
 	// vesselService.Init()
 	// vesselClient := vesselProto.NewVesselService("shippy.service.vessel", vesselService.Client())
-	vesselClient := vesselProto.NewVesselService("shippy.service.client", service.Client())
+	vesselClient := vesselProto.NewVesselService("shippy.service.vessel", service.Client())
 
 	// Register service
 	if err := pb.RegisterShippingServiceHandler(service.Server(), &consignmentService{repo, vesselClient}); err != nil {
