@@ -97,9 +97,10 @@ func main() {
 	// Init will parse the command line flags.
 	service.Init()
 
-	vesselService := micro.NewService(micro.Name("shippy.service.vessel"))
-	vesselService.Init()
-	vesselClient := vesselProto.NewVesselService("shippy.service.vessel", vesselService.Client())
+	// vesselService := micro.NewService(micro.Name("shippy.service.vessel"))
+	// vesselService.Init()
+	// vesselClient := vesselProto.NewVesselService("shippy.service.vessel", vesselService.Client())
+	vesselClient := vesselProto.NewVesselService("shippy.service.client", service.Client())
 
 	// Register service
 	if err := pb.RegisterShippingServiceHandler(service.Server(), &consignmentService{repo, vesselClient}); err != nil {
