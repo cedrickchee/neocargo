@@ -4,6 +4,7 @@ package main
 
 import (
 	"context"
+	"log"
 
 	pb "github.com/haxorbit/shippy/shippy-service-vessel/proto/vessel"
 )
@@ -21,11 +22,15 @@ func (s *handler) FindAvailable(ctx context.Context, req *pb.Specification, res 
 
 	// Find the next available vessel
 	vessel, err := s.repository.FindAvailable(ctx, MarshalSpecification(req))
+	log.Println("FindAvailable vessels DB call OK")
+
 	if err != nil {
+		log.Printf("FindAvailable vessels err: %v", err)
 		return err
 	}
 
 	// Set the vessel as part of the response message type
+	log.Printf("Found vessel: %v", vessel)
 	res.Vessel = UnmarshalVessel(vessel)
 	return nil
 }

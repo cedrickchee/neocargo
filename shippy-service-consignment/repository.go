@@ -4,6 +4,7 @@ package main
 
 import (
 	"context"
+	"log"
 
 	pb "github.com/haxorbit/shippy/shippy-service-consignment/proto/consignment"
 	"go.mongodb.org/mongo-driver/mongo"
@@ -128,14 +129,27 @@ func (repository *MongoRepository) Create(ctx context.Context, consignment *Cons
 
 // GetAll gets all consignment collection
 func (repository *MongoRepository) GetAll(ctx context.Context) ([]*Consignment, error) {
+	log.Println("Consignment repo.GetAll")
+
 	cur, err := repository.collection.Find(ctx, nil, nil)
+	if err != nil {
+		log.Printf("Consignment repo.collection.Find err: %v\n", err)
+		return nil, err
+	}
+	log.Printf("Consignment repo.collection.Find OK. cur: %v", cur)
+
 	var consignments []*Consignment
 	for cur.Next(ctx) {
 		var consignment *Consignment
+		log.Println("Consignment repo cursor")
+
 		if err := cur.Decode(&consignment); err != nil {
+			log.Printf("Consignment repo Decode err: %v\n", err)
 			return nil, err
 		}
 		consignments = append(consignments, consignment)
 	}
+
+	log.Printf("Consignment repo consignments: %v\n", consignments)
 	return consignments, err
 }

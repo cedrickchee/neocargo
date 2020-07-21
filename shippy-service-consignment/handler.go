@@ -4,6 +4,7 @@ package main
 
 import (
 	"context"
+	"log"
 
 	pb "github.com/haxorbit/shippy/shippy-service-consignment/proto/consignment"
 	vesselProto "github.com/haxorbit/shippy/shippy-service-vessel/proto/vessel"
@@ -57,10 +58,19 @@ func (s *handler) CreateConsignment(ctx context.Context, req *pb.Consignment, re
 // taking a context and a request as an argument. These are handled by the gRPC
 // server.
 func (s *handler) GetConsignments(ctx context.Context, req *pb.GetRequest, res *pb.Response) error {
+	log.Println("GetConsignments handler")
+
 	consignments, err := s.repository.GetAll(ctx)
+	log.Println("GetConsignments DB call OK")
+
 	if err != nil {
+		log.Printf("GetConsignments err: %v", err)
 		return err
 	}
+
+	log.Printf("Found consignments: %v\n", consignments)
 	res.Consignments = UnmarshalConsignmentCollection(consignments)
+
+	log.Println("Unmarshall consignments success")
 	return nil
 }
