@@ -35,6 +35,11 @@ The Shippy backend consists of 3 microservices:
 
 ## Usage
 
+### Installation
+
+- Rename file `config.env.example` in project root to `config.env`
+- Replace the variables (e.g.: `POSTGRES_PASSWORD`) in `config.env`
+
 ### Build and Run Docker Compose Stack
 
 I created a simple Makefile to build, run, test, and teardown Docker Compose
