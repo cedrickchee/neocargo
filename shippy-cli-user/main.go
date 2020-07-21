@@ -25,6 +25,35 @@ func createUser(ctx context.Context, service micro.Service, user *pb.User) error
 	return nil
 }
 
+func listUsers(ctx context.Context, service micro.Service) error {
+	client := pb.NewUserService("shippy.service.user", service.Client())
+
+	getAll, err := client.GetAll(ctx, &pb.Request{})
+	if err != nil {
+		return err
+	}
+	for _, v := range getAll.Users {
+		log.Println(v)
+	}
+
+	return nil
+}
+
+func authenticate(ctx context.Context, service micro.Service, email string, password string) error {
+	client := pb.NewUserService("shippy.service.user", service.Client())
+
+	authResponse, err := client.Auth(ctx, &pb.User{
+		Email:    email,
+		Password: password,
+	})
+	if err != nil {
+		return err
+	}
+
+	log.Printf("Your access token is: %s \n", authResponse.Token)
+	return nil
+}
+
 func main() {
 	// Create and initialize a new service
 	service := micro.NewService()
@@ -48,6 +77,16 @@ func main() {
 
 			if err := createUser(ctx, service, user); err != nil {
 				log.Println("Error creating user: ", err.Error())
+				return err
+			}
+
+			if err := listUsers(ctx, service); err != nil {
+				log.Println("Could not list users: ", err.Error())
+				return err
+			}
+
+			if err := authenticate(context.TODO(), service, email, password); err != nil {
+				log.Printf("Could not authenticate user: %s error: %v\n", email, err.Error())
 				return err
 			}
 
