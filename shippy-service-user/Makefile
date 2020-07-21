@@ -28,3 +28,6 @@ run: ## Run the container
 		-e POSTGRES_PASSWORD=${POSTGRES_PASSWORD} \
 		-e POSTGRES_DBNAME=${POSTGRES_DBNAME} \
 		shippy-service-user
+
+test: ## Run test suite
+	go test -v -timeout 30s github.com/haxorbit/shippy/shippy-service-user
