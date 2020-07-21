@@ -23,8 +23,8 @@ build: ## Generate protobuf code and then build the container
 
 run: ## Run the container
 	docker run -p 50051 -e MICRO_SERVER_ADDRESS=:50051 \
-		-e DB_HOST=${DB_HOST} \
-		-e DB_USER=${DB_USER} \
-		-e DB_PASSWORD=${DB_PASSWORD} \
-		-e DB_NAME=${DB_NAME} \
+		-e POSTGRES_HOST=${POSTGRES_HOST} \
+		-e POSTGRES_USER=${POSTGRES_USER} \
+		-e POSTGRES_PASSWORD=${POSTGRES_PASSWORD} \
+		-e POSTGRES_DBNAME=${POSTGRES_DBNAME} \
 		shippy-service-user

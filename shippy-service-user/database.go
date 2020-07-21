@@ -13,12 +13,10 @@ import (
 
 // NewConnection returns a new database connection instance.
 func NewConnection() (*sqlx.DB, error) {
-	log.Printf("DB_HOST: %v\n", os.Getenv("DB_HOST"))
-
-	host := os.Getenv("DB_HOST")
-	user := os.Getenv("DB_USER")
-	password := os.Getenv("DB_PASSWORD")
-	dbName := os.Getenv("DB_NAME")
+	host := os.Getenv("POSTGRES_HOST")
+	user := os.Getenv("POSTGRES_USER")
+	password := os.Getenv("POSTGRES_PASSWORD")
+	dbName := os.Getenv("POSTGRES_DBNAME")
 	conn := fmt.Sprintf("host=%s user=%s dbname=%s password=%s sslmode=disable", host, user, dbName, password)
 	log.Printf("conn: %v\n", conn)
 
