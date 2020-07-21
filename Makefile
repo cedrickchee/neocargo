@@ -21,6 +21,12 @@ help:
 build: ## Build stack with Docker Compose
 	docker-compose build --build-arg GITHUB_TOKEN=${GITHUB_TOKEN}
 
+build-user: ## Build single user container
+	docker-compose build user
+
+build-vessel: ## Build single vessel container
+	docker-compose build vessel
+
 # Run the containers
 run: ## Run stack with Docker Compose
 	docker-compose up
