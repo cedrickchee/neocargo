@@ -32,6 +32,8 @@ services:
       - 50053:50051
     environment:
       MICRO_SERVER_ADDRESS: ":50051"
+    env_file:
+      - config.env
 
   # Commands
   cli:
