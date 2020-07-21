@@ -27,4 +27,10 @@ RUN mkdir /app
 WORKDIR /app
 COPY --from=builder /app/shippy-service-user .
 
-CMD ["./shippy-service-user"]
+# Add the wait script to the image
+ENV WAIT_VERSION 2.7.3
+ADD https://github.com/ufoscout/docker-compose-wait/releases/download/$WAIT_VERSION/wait /wait
+RUN chmod +x /wait
+
+## Launch the wait tool and then our application
+CMD /wait && ./shippy-service-user
