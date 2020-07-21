@@ -1,3 +1,6 @@
+# This Dockerfile uses multi-stage Docker builds in Go with Go Modules
+
+# First stage - builder
 FROM golang:alpine as builder
 
 RUN apk update && apk upgrade && \
@@ -12,6 +15,8 @@ COPY . .
 
 RUN go mod download
 RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o shippy-service-user *.go
+
+# Second stage
 
 # Run container
 FROM alpine:latest
