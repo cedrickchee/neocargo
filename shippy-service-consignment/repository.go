@@ -7,6 +7,7 @@ import (
 	"log"
 
 	pb "github.com/haxorbit/shippy/shippy-service-consignment/proto/consignment"
+	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
 )
 
@@ -131,7 +132,7 @@ func (repository *MongoRepository) Create(ctx context.Context, consignment *Cons
 func (repository *MongoRepository) GetAll(ctx context.Context) ([]*Consignment, error) {
 	log.Println("Consignment repo.GetAll")
 
-	cur, err := repository.collection.Find(ctx, nil, nil)
+	cur, err := repository.collection.Find(ctx, bson.D{}, nil)
 	if err != nil {
 		log.Printf("Consignment repo.collection.Find err: %v\n", err)
 		return nil, err
