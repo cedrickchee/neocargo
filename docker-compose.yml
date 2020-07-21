@@ -47,6 +47,12 @@ services:
         - datastore
         - consignment
 
+  user-cli:
+    build: ./shippy-cli-user
+    depends_on:
+      - database
+      - user
+
   # Database tier
   datastore:
     image: mongo # official mongodb image

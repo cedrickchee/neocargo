@@ -31,8 +31,16 @@ build-vessel: ## Build single vessel container
 run: ## Run stack with Docker Compose
 	docker-compose up
 
-run-cli: ## Run the CLI tool
+run-cli: ## Run the consignment CLI tool
 	docker-compose run cli
+
+run-user-cli: ## Run the user CLI tool
+	docker-compose run user-cli \
+		-- \
+		--name="John Doe" \
+		--email="john@foo.bar" \
+		--password="test#test123" \
+		--company="SpaceY"
 
 # Stop the containers
 stop: ## Teardown stack and stop all containers
