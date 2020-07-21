@@ -2,8 +2,8 @@ module github.com/haxorbit/shippy/shippy-service-consignment
 
 go 1.14
 
-replace github.com/haxorbit/shippy/shippy-service-vessel => ../shippy-service-vessel
-replace github.com/haxorbit/shippy/shippy-service-user => ../shippy-service-user
+// replace github.com/haxorbit/shippy/shippy-service-vessel => ../shippy-service-vessel
+// replace github.com/haxorbit/shippy/shippy-service-user => ../shippy-service-user
 
 replace google.golang.org/grpc => google.golang.org/grpc v1.26.0
 
