@@ -13,7 +13,8 @@ services:
       - 50051:50051
     environment:
       MICRO_SERVER_ADDRESS: ":50051"
-      DB_HOST: "mongodb://datastore:27017"
+    env_file:
+      - config.env
 
   vessel:
     restart: always
@@ -24,7 +25,8 @@ services:
       - 50052:50051
     environment:
       MICRO_SERVER_ADDRESS: ":50051"
-      DB_HOST: "mongodb://datastore:27017"
+    env_file:
+      - config.env
 
   user:
     build: ./shippy-service-user
