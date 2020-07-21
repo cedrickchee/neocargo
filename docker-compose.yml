@@ -44,8 +44,8 @@ services:
   cli:
     build: ./shippy-cli-consignment
     depends_on:
-        - datastore
-        - consignment
+      - datastore
+      - consignment
 
   user-cli:
     build: ./shippy-cli-user
