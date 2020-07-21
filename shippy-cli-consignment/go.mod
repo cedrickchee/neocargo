@@ -2,7 +2,7 @@ module github.com/haxorbit/shippy/shippy-cli-consignment
 
 go 1.14
 
-// replace github.com/haxorbit/shippy/shippy-service-consignment => ../shippy-service-consignment
+replace github.com/haxorbit/shippy/shippy-service-consignment => ../shippy-service-consignment
 
 // Fix etcd dependency error
 replace google.golang.org/grpc => google.golang.org/grpc v1.26.0

@@ -11,4 +11,6 @@ build: ## Build the container
 	docker build --build-arg GITHUB_TOKEN=${GITHUB_TOKEN} -t shippy-cli-consignment .
 
 run: ## Run the container
-	docker run shippy-cli-consignment
+	docker run shippy-cli-consignment \
+		consignment.json \
+		eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9.TJVA95OrM7E2cBab30RMHrHDcEfxjoYZgeFONFh7HgQ
