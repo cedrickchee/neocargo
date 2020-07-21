@@ -18,6 +18,8 @@ services:
   vessel:
     restart: always
     build: ./shippy-service-vessel
+    depends_on:
+      - datastore
     ports:
       - 50052:50051
     environment:
