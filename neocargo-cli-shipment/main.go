@@ -63,18 +63,18 @@ func main() {
 	})
 
 	// First call using our tokenized context
-	r, err := client.CreateConsignment(ctx, shipment)
+	r, err := client.CreateShipment(ctx, shipment)
 	if err != nil {
 		log.Fatalf("Could not create a shipment: %v", err)
 	}
 	log.Printf("Created: %t", r.Created)
 
 	// Second call
-	getAll, err := client.GetConsignments(ctx, &pb.GetRequest{})
+	getAll, err := client.GetShipments(ctx, &pb.GetRequest{})
 	if err != nil {
-		log.Fatalf("Could not list consignments: %v", err)
+		log.Fatalf("Could not list shipments: %v", err)
 	}
-	for i, v := range getAll.Consignments {
+	for i, v := range getAll.Shipments {
 		log.Printf("Shipment %d: %v", i+1, v)
 	}
 }

@@ -87,8 +87,8 @@ func main() {
 	defer client.Disconnect(context.Background())
 
 	// Initialize database and collection
-	consignmentCollection := client.Database("neocargo").Collection("consignments")
-	repository := &MongoRepository{consignmentCollection}
+	shipmentCollection := client.Database("neocargo").Collection("shipments")
+	repository := &MongoRepository{shipmentCollection}
 
 	vesselClient := vesselProto.NewVesselService("neocargo.service.vessel", service.Client())
 

@@ -5,9 +5,9 @@ package shipment;
 // option go_package = "github.com/protodev/microservice/shipment;shipment";
 
 service ShippingService {
-  rpc CreateConsignment(Shipment) returns (Response) {}
+  rpc CreateShipment(Shipment) returns (Response) {}
 
-  rpc GetConsignments(GetRequest) returns (Response) {}
+  rpc GetShipments(GetRequest) returns (Response) {}
 }
 
 message Shipment {
@@ -32,5 +32,5 @@ message Response {
   Shipment shipment = 2;
 
   // Add a pluralised shipment to our generic response message
-  repeated Shipment consignments = 3;
+  repeated Shipment shipments = 3;
 }

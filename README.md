@@ -6,7 +6,7 @@ This project is an example of multiple microservices implementation in Go in a m
 
 The neoCargo backend consists of 3 microservices:
 
-- [Consignments](./neocargo-service-shipment)
+- [Shipments](./neocargo-service-shipment)
 - [Vessels](./neocargo-service-vessel)
 - [Users](./neocargo-service-user)
 - Authentication

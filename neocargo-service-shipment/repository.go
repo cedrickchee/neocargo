@@ -62,11 +62,11 @@ func UnmarshalContainerCollection(containers []*Container) []*pb.Container {
 	return collection
 }
 
-// UnmarshalConsignmentCollection ...
-func UnmarshalConsignmentCollection(consignments []*Shipment) []*pb.Shipment {
+// UnmarshalShipmentCollection ...
+func UnmarshalShipmentCollection(shipments []*Shipment) []*pb.Shipment {
 	collection := make([]*pb.Shipment, 0)
-	for _, shipment := range consignments {
-		collection = append(collection, UnmarshalConsignment(shipment))
+	for _, shipment := range shipments {
+		collection = append(collection, UnmarshalShipment(shipment))
 	}
 	return collection
 }
@@ -89,8 +89,8 @@ func MarshalContainer(container *pb.Container) *Container {
 	}
 }
 
-// MarshalConsignment marshals an input shipment type to a shipment model
-func MarshalConsignment(shipment *pb.Shipment) *Shipment {
+// MarshalShipment marshals an input shipment type to a shipment model
+func MarshalShipment(shipment *pb.Shipment) *Shipment {
 	containers := MarshalContainerCollection(shipment.Containers)
 	return &Shipment{
 		ID:          shipment.Id,
@@ -101,8 +101,8 @@ func MarshalConsignment(shipment *pb.Shipment) *Shipment {
 	}
 }
 
-// UnmarshalConsignment ...
-func UnmarshalConsignment(shipment *Shipment) *pb.Shipment {
+// UnmarshalShipment ...
+func UnmarshalShipment(shipment *Shipment) *pb.Shipment {
 	return &pb.Shipment{
 		Id:          shipment.ID,
 		Weight:      shipment.Weight,
@@ -139,7 +139,7 @@ func (repository *MongoRepository) GetAll(ctx context.Context) ([]*Shipment, err
 	}
 	log.Printf("Shipment repo.collection.Find OK. cur: %v", cur)
 
-	var consignments []*Shipment
+	var shipments []*Shipment
 	for cur.Next(ctx) {
 		var shipment *Shipment
 		log.Println("Shipment repo cursor")
@@ -148,9 +148,9 @@ func (repository *MongoRepository) GetAll(ctx context.Context) ([]*Shipment, err
 			log.Printf("Shipment repo Decode err: %v\n", err)
 			return nil, err
 		}
-		consignments = append(consignments, shipment)
+		shipments = append(shipments, shipment)
 	}
 
-	log.Printf("Shipment repo consignments: %v\n", consignments)
-	return consignments, err
+	log.Printf("Shipment repo shipments: %v\n", shipments)
+	return shipments, err
 }

@@ -20,10 +20,10 @@ type handler struct {
 	vesselClient vesselProto.VesselService
 }
 
-// CreateConsignment is a method on our service. It creates a new shipment by
+// CreateShipment is a method on our service. It creates a new shipment by
 // taking a context and a request as an argument. These are handled by the gRPC
 // server.
-func (s *handler) CreateConsignment(ctx context.Context, req *pb.Shipment, res *pb.Response) error {
+func (s *handler) CreateShipment(ctx context.Context, req *pb.Shipment, res *pb.Response) error {
 
 	// Here we call a client instance of our vessel service with our shipment
 	// weight, and the amount of containers as the capacity value.
@@ -43,7 +43,7 @@ func (s *handler) CreateConsignment(ctx context.Context, req *pb.Shipment, res *
 	req.VesselId = vesselResponse.Vessel.Id
 
 	// Save our shipment
-	if err = s.repository.Create(ctx, MarshalConsignment(req)); err != nil {
+	if err = s.repository.Create(ctx, MarshalShipment(req)); err != nil {
 		return err
 	}
 
@@ -54,23 +54,23 @@ func (s *handler) CreateConsignment(ctx context.Context, req *pb.Shipment, res *
 	return nil
 }
 
-// GetConsignments is a method on our service. It gets all shipment by
+// GetShipments is a method on our service. It gets all shipment by
 // taking a context and a request as an argument. These are handled by the gRPC
 // server.
-func (s *handler) GetConsignments(ctx context.Context, req *pb.GetRequest, res *pb.Response) error {
-	log.Println("GetConsignments handler")
+func (s *handler) GetShipments(ctx context.Context, req *pb.GetRequest, res *pb.Response) error {
+	log.Println("GetShipments handler")
 
-	consignments, err := s.repository.GetAll(ctx)
-	log.Println("GetConsignments DB call OK")
+	shipments, err := s.repository.GetAll(ctx)
+	log.Println("GetShipments DB call OK")
 
 	if err != nil {
-		log.Printf("GetConsignments err: %v", err)
+		log.Printf("GetShipments err: %v", err)
 		return err
 	}
 
-	log.Printf("Found consignments: %v\n", consignments)
-	res.Consignments = UnmarshalConsignmentCollection(consignments)
+	log.Printf("Found shipments: %v\n", shipments)
+	res.Shipments = UnmarshalShipmentCollection(shipments)
 
-	log.Println("Unmarshall consignments success")
+	log.Println("Unmarshall shipments success")
 	return nil
 }
