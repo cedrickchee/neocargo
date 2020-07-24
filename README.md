@@ -8,8 +8,7 @@ The neoCargo backend consists of 3 microservices:
 
 - [Shipments](./neocargo-service-shipment)
 - [Vessels](./neocargo-service-vessel)
-- [Users](./neocargo-service-user)
-- Authentication
+- [Users + Authentication](./neocargo-service-user)
 
 ## Tech Stack
 
@@ -18,11 +17,21 @@ The neoCargo backend consists of 3 microservices:
 - Docker container ([Alpine Linux](https://alpinelinux.org/about/) as base image)
 - Docker Compose
 - PostgreSQL or MongoDB database
+- User authentication with JWT
 - Google Cloud
 - Kubernetes
-- NATS
+- [NATS](https://nats.io/)
 - CircleCI
-- Terraform
+- [Terraform](https://www.terraform.io/)
+
+## System Architecture
+
+(_Work in progress_)
+
+A good architecture is when services are decoupled. We will achieve that with
+event driven architecture or pubsub.
+
+We need to integrate the NATS broker plug-in into our services.
 
 ## Prerequisite
 
@@ -40,7 +49,9 @@ The neoCargo backend consists of 3 microservices:
 - Rename file `config.env.example` in project root to `config.env`
 - Replace the variables (e.g.: `POSTGRES_PASSWORD`) in `config.env`
 
-### Build and Run Docker Compose Stack
+### Local Development
+
+**Build and run Docker Compose stack**
 
 I created a simple Makefile to build, run, test, and teardown Docker Compose
 stack in local development machine.
@@ -172,7 +183,7 @@ Test it all by running our CLI tool.
 
 To run it through docker-compose, run:
 
-- Shipment CLI tool
+- Create a shipment
 
 ```sh
 $ make run-cli
@@ -189,7 +200,7 @@ Starting neocargo_shipment_1 ... done
 make: *** [Makefile:35: run-cli] Error 1
 ```
 
-- User CLI tool
+- Create a user
 
 ```sh
 $ make run-user-cli
@@ -207,3 +218,72 @@ Created user. Response:
 {"id":"go.micro.client","code":500,"detail":"must pass a pointer, not a value, to StructScan destination","status":"Internal Server Error"}
 make: *** [Makefile:41: run-user-cli] Error 1
 ```
+
+### Deployment
+
+(_Work in progress_)
+
+#### Terraform
+
+We will create a cloud environment to host our services. We will be using
+Terraform to provision and manage our cloud cluster on Google Cloud.
+
+Steps:
+
+- Create your [Google Cloud](http://console.cloud.google.com/) project
+- Modify the configurations in our [Infra-as-Code project](./infra)
+- Move the key you created earlier into the project root and name it `gcp-cred.json`.
+
+Next, create a new cluster:
+
+```sh
+$ terraform init
+
+# View deployment plan
+$ terraform plan
+
+# Apply the changes
+$ terraform apply
+```
+
+Once it's done, see your new cluster. Go to Google Cloud console and look for Kubernetes Engine (GKE).
+Next, deploy our containers to the cluster.
+
+#### Google Kubernetes Engine (GKE)
+
+(_Work in progress_)
+
+Set-up and deploy containers into cluster using GKE.
+
+Steps:
+
+- Ensure you have the [kubectl cli installed locally](https://cloud.google.com/kubernetes-engine/docs/quickstart#local-shell):
+
+```
+$ gcloud components install kubectl
+```
+
+Usually, you'd deploy a PostgreSQL/MongoDB instance, or database instance along
+with every service, for complete separation.
+
+Then we deploy our services, shipment-service, vessel-service, and user-service.
+
+**MongoDB containers**
+
+I created three Kubernetes deployment files for MongoDB:
+- [storage](./deployment/mongodb-deployment.yml)
+- [stateful set](./deployment/mongodb-deployment.yml)
+- [our service](./deployment/service.yml)
+
+```sh
+$ kubectl create -f ./deployment/mongodb-ssd.yml
+$ kubectl create -f ./deployment/mongodb-deployment.yml
+$ kubectl create -f ./deployment/mongodb-service.yml
+```
+
+The result of this will be a replicated set of MongoDB containers, with stateful storage and a service exposing the datastore across our other pods.
+
+**Vessel service**
+
+[Micro on Kubernetes](https://github.com/micro/services/tree/v0.2.0/kubernetes)
+provides a Kubernetes native runtime to help micro service deployment.
