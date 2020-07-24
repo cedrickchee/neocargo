@@ -10,12 +10,12 @@ export $(shell sed 's/=.*//' $(cnf))
 build: ## Build proto file and then build the container
 	protoc --proto_path=. --go_out=. --micro_out=. \
 		--go_opt=paths=source_relative \
-		proto/consignment/consignment.proto
-	docker build --build-arg GITHUB_TOKEN=${GITHUB_TOKEN} -t neocargo-service-consignment .
+		proto/shipment/shipment.proto
+	docker build --build-arg GITHUB_TOKEN=${GITHUB_TOKEN} -t neocargo-service-shipment .
 
 run: ## Run the container
 	docker run -p 50051:50051 \
 		-e MICRO_SERVER_ADDRESS=:50051 \
 		-e DB_HOST=mongodb://datastore:27017 \
 		-e DISABLE_AUTH=true \
-		neocargo-service-consignment
+		neocargo-service-shipment

@@ -6,7 +6,7 @@ import (
 	"os"
 
 	// Import the generated protobuf code
-	pb "github.com/haxorbit/neocargo/neocargo-service-consignment/proto/consignment"
+	pb "github.com/haxorbit/neocargo/neocargo-service-shipment/proto/shipment"
 	userProto "github.com/haxorbit/neocargo/neocargo-service-user/proto/user"
 	vesselProto "github.com/haxorbit/neocargo/neocargo-service-vessel/proto/vessel"
 	"github.com/pkg/errors"
@@ -26,7 +26,7 @@ var (
 
 // AuthWrapper is a handler wrapper - a high-order function which takes a HandlerFunc
 // and returns a function, which takes a context, request and response interface.
-// The token is extracted from the context set in our consignment-cli, that
+// The token is extracted from the context set in our shipment-cli, that
 // token is then sent over to the user service to be validated.
 // If valid, the call is passed along to the handler. If not,
 // an error is returned.
@@ -66,7 +66,7 @@ func main() {
 	service = micro.NewService(
 
 		// This name must match the package name given in your protobuf definition
-		micro.Name("neocargo.service.consignment"),
+		micro.Name("neocargo.service.shipment"),
 		// Our auth middleware
 		micro.WrapHandler(AuthWrapper),
 	)

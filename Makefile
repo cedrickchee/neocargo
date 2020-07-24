@@ -31,10 +31,10 @@ build-vessel: ## Build single vessel container
 run: ## Run stack with Docker Compose
 	docker-compose up
 
-run-cli: ## Run the consignment CLI tool
+run-cli: ## Run the shipment CLI tool
 	docker-compose run cli \
-		./neocargo-cli-consignment \
-		consignment.json \
+		./neocargo-cli-shipment \
+		shipment.json \
 		eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9.TJVA95OrM7E2cBab30RMHrHDcEfxjoYZgeFONFh7HgQ
 
 run-user-cli: ## Run the user CLI tool

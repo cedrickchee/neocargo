@@ -2,9 +2,9 @@
 // versions:
 // 	protoc-gen-go v1.23.0
 // 	protoc        v3.6.1
-// source: proto/consignment/consignment.proto
+// source: proto/shipment/shipment.proto
 
-package consignment
+package shipment
 
 import (
 	proto "github.com/golang/protobuf/proto"
@@ -25,7 +25,7 @@ const (
 // of the legacy proto package is being used.
 const _ = proto.ProtoPackageIsVersion4
 
-type Consignment struct {
+type Shipment struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
@@ -37,8 +37,8 @@ type Consignment struct {
 	VesselId    string       `protobuf:"bytes,5,opt,name=vessel_id,json=vesselId,proto3" json:"vessel_id,omitempty"`
 }
 
-func (x *Consignment) Reset() {
-	*x = Consignment{}
+func (x *Shipment) Reset() {
+	*x = Shipment{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_proto_consignment_consignment_proto_msgTypes[0]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -46,13 +46,13 @@ func (x *Consignment) Reset() {
 	}
 }
 
-func (x *Consignment) String() string {
+func (x *Shipment) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*Consignment) ProtoMessage() {}
+func (*Shipment) ProtoMessage() {}
 
-func (x *Consignment) ProtoReflect() protoreflect.Message {
+func (x *Shipment) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_consignment_consignment_proto_msgTypes[0]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -64,40 +64,40 @@ func (x *Consignment) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use Consignment.ProtoReflect.Descriptor instead.
-func (*Consignment) Descriptor() ([]byte, []int) {
+// Deprecated: Use Shipment.ProtoReflect.Descriptor instead.
+func (*Shipment) Descriptor() ([]byte, []int) {
 	return file_proto_consignment_consignment_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *Consignment) GetId() string {
+func (x *Shipment) GetId() string {
 	if x != nil {
 		return x.Id
 	}
 	return ""
 }
 
-func (x *Consignment) GetDescription() string {
+func (x *Shipment) GetDescription() string {
 	if x != nil {
 		return x.Description
 	}
 	return ""
 }
 
-func (x *Consignment) GetWeight() int32 {
+func (x *Shipment) GetWeight() int32 {
 	if x != nil {
 		return x.Weight
 	}
 	return 0
 }
 
-func (x *Consignment) GetContainers() []*Container {
+func (x *Shipment) GetContainers() []*Container {
 	if x != nil {
 		return x.Containers
 	}
 	return nil
 }
 
-func (x *Consignment) GetVesselId() string {
+func (x *Shipment) GetVesselId() string {
 	if x != nil {
 		return x.VesselId
 	}
@@ -218,10 +218,10 @@ type Response struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Created     bool         `protobuf:"varint,1,opt,name=created,proto3" json:"created,omitempty"`
-	Consignment *Consignment `protobuf:"bytes,2,opt,name=consignment,proto3" json:"consignment,omitempty"`
-	// Add a pluralised consignment to our generic response message
-	Consignments []*Consignment `protobuf:"bytes,3,rep,name=consignments,proto3" json:"consignments,omitempty"`
+	Created  bool      `protobuf:"varint,1,opt,name=created,proto3" json:"created,omitempty"`
+	Shipment *Shipment `protobuf:"bytes,2,opt,name=shipment,proto3" json:"shipment,omitempty"`
+	// Add a pluralised shipment to our generic response message
+	Consignments []*Shipment `protobuf:"bytes,3,rep,name=consignments,proto3" json:"consignments,omitempty"`
 }
 
 func (x *Response) Reset() {
@@ -263,14 +263,14 @@ func (x *Response) GetCreated() bool {
 	return false
 }
 
-func (x *Response) GetConsignment() *Consignment {
+func (x *Response) GetConsignment() *Shipment {
 	if x != nil {
-		return x.Consignment
+		return x.Shipment
 	}
 	return nil
 }
 
-func (x *Response) GetConsignments() []*Consignment {
+func (x *Response) GetConsignments() []*Shipment {
 	if x != nil {
 		return x.Consignments
 	}
@@ -339,19 +339,19 @@ func file_proto_consignment_consignment_proto_rawDescGZIP() []byte {
 
 var file_proto_consignment_consignment_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
 var file_proto_consignment_consignment_proto_goTypes = []interface{}{
-	(*Consignment)(nil), // 0: consignment.Consignment
-	(*Container)(nil),   // 1: consignment.Container
-	(*GetRequest)(nil),  // 2: consignment.GetRequest
-	(*Response)(nil),    // 3: consignment.Response
+	(*Shipment)(nil),   // 0: shipment.Shipment
+	(*Container)(nil),  // 1: shipment.Container
+	(*GetRequest)(nil), // 2: shipment.GetRequest
+	(*Response)(nil),   // 3: shipment.Response
 }
 var file_proto_consignment_consignment_proto_depIdxs = []int32{
-	1, // 0: consignment.Consignment.containers:type_name -> consignment.Container
-	0, // 1: consignment.Response.consignment:type_name -> consignment.Consignment
-	0, // 2: consignment.Response.consignments:type_name -> consignment.Consignment
-	0, // 3: consignment.ShippingService.CreateConsignment:input_type -> consignment.Consignment
-	2, // 4: consignment.ShippingService.GetConsignments:input_type -> consignment.GetRequest
-	3, // 5: consignment.ShippingService.CreateConsignment:output_type -> consignment.Response
-	3, // 6: consignment.ShippingService.GetConsignments:output_type -> consignment.Response
+	1, // 0: shipment.Shipment.containers:type_name -> shipment.Container
+	0, // 1: shipment.Response.shipment:type_name -> shipment.Shipment
+	0, // 2: shipment.Response.consignments:type_name -> shipment.Shipment
+	0, // 3: shipment.ShippingService.CreateConsignment:input_type -> shipment.Shipment
+	2, // 4: shipment.ShippingService.GetConsignments:input_type -> shipment.GetRequest
+	3, // 5: shipment.ShippingService.CreateConsignment:output_type -> shipment.Response
+	3, // 6: shipment.ShippingService.GetConsignments:output_type -> shipment.Response
 	5, // [5:7] is the sub-list for method output_type
 	3, // [3:5] is the sub-list for method input_type
 	3, // [3:3] is the sub-list for extension type_name
@@ -366,7 +366,7 @@ func file_proto_consignment_consignment_proto_init() {
 	}
 	if !protoimpl.UnsafeEnabled {
 		file_proto_consignment_consignment_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*Consignment); i {
+			switch v := v.(*Shipment); i {
 			case 0:
 				return &v.state
 			case 1:

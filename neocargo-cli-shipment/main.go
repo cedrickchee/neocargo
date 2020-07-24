@@ -9,7 +9,7 @@ import (
 
 	"context"
 
-	pb "github.com/haxorbit/neocargo/neocargo-service-consignment/proto/consignment"
+	pb "github.com/haxorbit/neocargo/neocargo-service-shipment/proto/shipment"
 
 	micro "github.com/micro/go-micro/v2"
 	"github.com/micro/go-micro/v2/metadata"
@@ -17,25 +17,25 @@ import (
 
 const (
 	address         = "localhost:50051"
-	defaultFilename = "consignment.json"
+	defaultFilename = "shipment.json"
 )
 
-func parseFile(file string) (*pb.Consignment, error) {
-	var consignment *pb.Consignment
+func parseFile(file string) (*pb.Shipment, error) {
+	var shipment *pb.Shipment
 	data, err := ioutil.ReadFile(file)
 	if err != nil {
 		return nil, err
 	}
-	json.Unmarshal(data, &consignment)
-	return consignment, err
+	json.Unmarshal(data, &shipment)
+	return shipment, err
 }
 
 func main() {
 	// Set up a connection to the server.
-	service := micro.NewService(micro.Name("neocargo.cli.consignment"))
+	service := micro.NewService(micro.Name("neocargo.cli.shipment"))
 	service.Init()
 
-	client := pb.NewShippingService("neocargo.service.consignment", service.Client())
+	client := pb.NewShippingService("neocargo.service.shipment", service.Client())
 
 	// Contact the server and print out its response.
 	file := defaultFilename
@@ -49,7 +49,7 @@ func main() {
 	file = os.Args[1]
 	token = os.Args[2]
 
-	consignment, err := parseFile(file)
+	shipment, err := parseFile(file)
 
 	if err != nil {
 		log.Fatalf("Could not parse file: %v", err)
@@ -57,15 +57,15 @@ func main() {
 
 	// Create a new context which contains our given token.
 	// This same context will be passed into both the calls we make
-	// to our consignment-service.
+	// to our shipment-service.
 	ctx := metadata.NewContext(context.Background(), map[string]string{
 		"token": token,
 	})
 
 	// First call using our tokenized context
-	r, err := client.CreateConsignment(ctx, consignment)
+	r, err := client.CreateConsignment(ctx, shipment)
 	if err != nil {
-		log.Fatalf("Could not create a consignment: %v", err)
+		log.Fatalf("Could not create a shipment: %v", err)
 	}
 	log.Printf("Created: %t", r.Created)
 
@@ -75,6 +75,6 @@ func main() {
 		log.Fatalf("Could not list consignments: %v", err)
 	}
 	for i, v := range getAll.Consignments {
-		log.Printf("Consignment %d: %v", i+1, v)
+		log.Printf("Shipment %d: %v", i+1, v)
 	}
 }

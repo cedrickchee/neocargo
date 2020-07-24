@@ -23,7 +23,7 @@ COPY . .
 
 RUN go mod download
 # Build binary
-RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o neocargo-service-consignment *.go
+RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o neocargo-service-shipment *.go
 
 # Run container
 # Take the binary from build container and then run binary,
@@ -34,6 +34,6 @@ RUN apk --no-cache add ca-certificates
 
 RUN mkdir /app
 WORKDIR /app
-COPY --from=builder /app/neocargo-service-consignment .
+COPY --from=builder /app/neocargo-service-shipment .
 
-CMD ["./neocargo-service-consignment"]
+CMD ["./neocargo-service-shipment"]

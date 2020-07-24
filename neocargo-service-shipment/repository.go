@@ -6,15 +6,15 @@ import (
 	"context"
 	"log"
 
-	pb "github.com/haxorbit/neocargo/neocargo-service-consignment/proto/consignment"
+	pb "github.com/haxorbit/neocargo/neocargo-service-shipment/proto/shipment"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
 )
 
 // Datastore models
 
-// Consignment model
-type Consignment struct {
+// Shipment model
+type Shipment struct {
 	ID          string     `json:"id"`
 	Weight      int32      `json:"weight"`
 	Description string     `json:"description"`
@@ -63,10 +63,10 @@ func UnmarshalContainerCollection(containers []*Container) []*pb.Container {
 }
 
 // UnmarshalConsignmentCollection ...
-func UnmarshalConsignmentCollection(consignments []*Consignment) []*pb.Consignment {
-	collection := make([]*pb.Consignment, 0)
-	for _, consignment := range consignments {
-		collection = append(collection, UnmarshalConsignment(consignment))
+func UnmarshalConsignmentCollection(consignments []*Shipment) []*pb.Shipment {
+	collection := make([]*pb.Shipment, 0)
+	for _, shipment := range consignments {
+		collection = append(collection, UnmarshalConsignment(shipment))
 	}
 	return collection
 }
@@ -89,32 +89,32 @@ func MarshalContainer(container *pb.Container) *Container {
 	}
 }
 
-// MarshalConsignment marshals an input consignment type to a consignment model
-func MarshalConsignment(consignment *pb.Consignment) *Consignment {
-	containers := MarshalContainerCollection(consignment.Containers)
-	return &Consignment{
-		ID:          consignment.Id,
-		Weight:      consignment.Weight,
-		Description: consignment.Description,
+// MarshalConsignment marshals an input shipment type to a shipment model
+func MarshalConsignment(shipment *pb.Shipment) *Shipment {
+	containers := MarshalContainerCollection(shipment.Containers)
+	return &Shipment{
+		ID:          shipment.Id,
+		Weight:      shipment.Weight,
+		Description: shipment.Description,
 		Containers:  containers,
-		VesselID:    consignment.VesselId,
+		VesselID:    shipment.VesselId,
 	}
 }
 
 // UnmarshalConsignment ...
-func UnmarshalConsignment(consignment *Consignment) *pb.Consignment {
-	return &pb.Consignment{
-		Id:          consignment.ID,
-		Weight:      consignment.Weight,
-		Description: consignment.Description,
-		Containers:  UnmarshalContainerCollection(consignment.Containers),
-		VesselId:    consignment.VesselID,
+func UnmarshalConsignment(shipment *Shipment) *pb.Shipment {
+	return &pb.Shipment{
+		Id:          shipment.ID,
+		Weight:      shipment.Weight,
+		Description: shipment.Description,
+		Containers:  UnmarshalContainerCollection(shipment.Containers),
+		VesselId:    shipment.VesselID,
 	}
 }
 
 type repository interface {
-	Create(ctx context.Context, consignment *Consignment) error
-	GetAll(ctx context.Context) ([]*Consignment, error)
+	Create(ctx context.Context, shipment *Shipment) error
+	GetAll(ctx context.Context) ([]*Shipment, error)
 }
 
 // MongoRepository implementation
@@ -122,35 +122,35 @@ type MongoRepository struct {
 	collection *mongo.Collection
 }
 
-// Create creates a consignment collection
-func (repository *MongoRepository) Create(ctx context.Context, consignment *Consignment) error {
-	_, err := repository.collection.InsertOne(ctx, consignment)
+// Create creates a shipment collection
+func (repository *MongoRepository) Create(ctx context.Context, shipment *Shipment) error {
+	_, err := repository.collection.InsertOne(ctx, shipment)
 	return err
 }
 
-// GetAll gets all consignment collection
-func (repository *MongoRepository) GetAll(ctx context.Context) ([]*Consignment, error) {
-	log.Println("Consignment repo.GetAll")
+// GetAll gets all shipment collection
+func (repository *MongoRepository) GetAll(ctx context.Context) ([]*Shipment, error) {
+	log.Println("Shipment repo.GetAll")
 
 	cur, err := repository.collection.Find(ctx, bson.D{}, nil)
 	if err != nil {
-		log.Printf("Consignment repo.collection.Find err: %v\n", err)
+		log.Printf("Shipment repo.collection.Find err: %v\n", err)
 		return nil, err
 	}
-	log.Printf("Consignment repo.collection.Find OK. cur: %v", cur)
+	log.Printf("Shipment repo.collection.Find OK. cur: %v", cur)
 
-	var consignments []*Consignment
+	var consignments []*Shipment
 	for cur.Next(ctx) {
-		var consignment *Consignment
-		log.Println("Consignment repo cursor")
+		var shipment *Shipment
+		log.Println("Shipment repo cursor")
 
-		if err := cur.Decode(&consignment); err != nil {
-			log.Printf("Consignment repo Decode err: %v\n", err)
+		if err := cur.Decode(&shipment); err != nil {
+			log.Printf("Shipment repo Decode err: %v\n", err)
 			return nil, err
 		}
-		consignments = append(consignments, consignment)
+		consignments = append(consignments, shipment)
 	}
 
-	log.Printf("Consignment repo consignments: %v\n", consignments)
+	log.Printf("Shipment repo consignments: %v\n", consignments)
 	return consignments, err
 }

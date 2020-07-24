@@ -8,10 +8,10 @@ include $(cnf)
 export $(shell sed 's/=.*//' $(cnf))
 
 build: ## Build the container
-	docker build --build-arg GITHUB_TOKEN=${GITHUB_TOKEN} -t neocargo-cli-consignment .
+	docker build --build-arg GITHUB_TOKEN=${GITHUB_TOKEN} -t neocargo-cli-shipment .
 
 run: ## Run the container
-	docker run neocargo-cli-consignment \
-		./neocargo-cli-consignment \
-		consignment.json \
+	docker run neocargo-cli-shipment \
+		./neocargo-cli-shipment \
+		shipment.json \
 		eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9.TJVA95OrM7E2cBab30RMHrHDcEfxjoYZgeFONFh7HgQ

@@ -1,4 +1,4 @@
-# neoCargo Consignment Microservice
+# neoCargo Shipment Microservice
 
 ## Prerequisite
 

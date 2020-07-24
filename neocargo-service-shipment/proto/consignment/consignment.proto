@@ -1,16 +1,16 @@
 syntax = "proto3";
 
-package consignment; 
+package shipment;
 
-// option go_package = "github.com/protodev/microservice/consignment;consignment";
+// option go_package = "github.com/protodev/microservice/shipment;shipment";
 
 service ShippingService {
-  rpc CreateConsignment(Consignment) returns (Response) {}
+  rpc CreateConsignment(Shipment) returns (Response) {}
 
   rpc GetConsignments(GetRequest) returns (Response) {}
 }
 
-message Consignment {
+message Shipment {
   string id = 1;
   string description = 2;
   int32 weight = 3;
@@ -29,8 +29,8 @@ message GetRequest {}
 
 message Response {
   bool created = 1;
-  Consignment consignment = 2;
+  Shipment shipment = 2;
 
-  // Add a pluralised consignment to our generic response message
-  repeated Consignment consignments = 3;
+  // Add a pluralised shipment to our generic response message
+  repeated Shipment consignments = 3;
 }

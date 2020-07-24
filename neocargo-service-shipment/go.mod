@@ -1,4 +1,4 @@
-module github.com/haxorbit/neocargo/neocargo-service-consignment
+module github.com/haxorbit/neocargo/neocargo-service-shipment
 
 go 1.14
 

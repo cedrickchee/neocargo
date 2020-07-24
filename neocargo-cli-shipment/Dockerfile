@@ -20,7 +20,7 @@ RUN git config --global url."https://${GITHUB_TOKEN}:x-oauth-basic@github.com/ha
 COPY . .
 
 RUN go mod download
-RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o neocargo-cli-consignment
+RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o neocargo-cli-shipment
 
 # Run container
 FROM alpine:latest
@@ -30,7 +30,7 @@ RUN apk --no-cache add ca-certificates
 RUN mkdir /app
 WORKDIR /app
 
-COPY --from=builder /app/consignment.json .
-COPY --from=builder /app/neocargo-cli-consignment .
+COPY --from=builder /app/shipment.json .
+COPY --from=builder /app/neocargo-cli-shipment .
 
-CMD ["./neocargo-cli-consignment"]
+CMD ["./neocargo-cli-shipment"]

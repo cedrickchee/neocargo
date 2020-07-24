@@ -3,9 +3,9 @@ version: '3.5'
 services:
 
   # Services
-  consignment:
+  shipment:
     restart: always
-    build: ./neocargo-service-consignment
+    build: ./neocargo-service-shipment
     depends_on:
       - datastore
       - vessel
@@ -42,10 +42,10 @@ services:
 
   # Commands
   cli:
-    build: ./neocargo-cli-consignment
+    build: ./neocargo-cli-shipment
     depends_on:
       - datastore
-      - consignment
+      - shipment
 
   user-cli:
     build: ./neocargo-cli-user

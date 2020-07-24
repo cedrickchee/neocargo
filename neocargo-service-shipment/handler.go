@@ -6,7 +6,7 @@ import (
 	"context"
 	"log"
 
-	pb "github.com/haxorbit/neocargo/neocargo-service-consignment/proto/consignment"
+	pb "github.com/haxorbit/neocargo/neocargo-service-shipment/proto/shipment"
 	vesselProto "github.com/haxorbit/neocargo/neocargo-service-vessel/proto/vessel"
 	"github.com/pkg/errors"
 )
@@ -20,12 +20,12 @@ type handler struct {
 	vesselClient vesselProto.VesselService
 }
 
-// CreateConsignment is a method on our service. It creates a new consignment by
+// CreateConsignment is a method on our service. It creates a new shipment by
 // taking a context and a request as an argument. These are handled by the gRPC
 // server.
-func (s *handler) CreateConsignment(ctx context.Context, req *pb.Consignment, res *pb.Response) error {
+func (s *handler) CreateConsignment(ctx context.Context, req *pb.Shipment, res *pb.Response) error {
 
-	// Here we call a client instance of our vessel service with our consignment
+	// Here we call a client instance of our vessel service with our shipment
 	// weight, and the amount of containers as the capacity value.
 	vesselResponse, err := s.vesselClient.FindAvailable(ctx, &vesselProto.Specification{
 		MaxWeight: req.Weight,
@@ -42,7 +42,7 @@ func (s *handler) CreateConsignment(ctx context.Context, req *pb.Consignment, re
 	// We set the VesselId as the vessel we got back from our vessel service.
 	req.VesselId = vesselResponse.Vessel.Id
 
-	// Save our consignment
+	// Save our shipment
 	if err = s.repository.Create(ctx, MarshalConsignment(req)); err != nil {
 		return err
 	}
@@ -50,11 +50,11 @@ func (s *handler) CreateConsignment(ctx context.Context, req *pb.Consignment, re
 	// Return matching the `Response` message we created in our protobuf
 	// definition.
 	res.Created = true
-	res.Consignment = req
+	res.Shipment = req
 	return nil
 }
 
-// GetConsignments is a method on our service. It gets all consignment by
+// GetConsignments is a method on our service. It gets all shipment by
 // taking a context and a request as an argument. These are handled by the gRPC
 // server.
 func (s *handler) GetConsignments(ctx context.Context, req *pb.GetRequest, res *pb.Response) error {
