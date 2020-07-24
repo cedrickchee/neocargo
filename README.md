@@ -285,5 +285,45 @@ The result of this will be a replicated set of MongoDB containers, with stateful
 
 **Vessel service**
 
-[Micro on Kubernetes](https://github.com/micro/services/tree/v0.2.0/kubernetes)
-provides a Kubernetes native runtime to help micro service deployment.
+I have created a [deployment file for vessel service](./deployment/vessel-service-deployment.yml).
+
+We're pushing and pulling our Docker image from a private [Container Registry](https://cloud.google.com/container-registry/docs/pushing-and-pulling).
+
+```sh
+$ docker build -t asia.gcr.io/neocargo/vessel-service:latest .
+$ gcloud docker -- push asia.gcr.io/neocargo/vessel-service:latest
+```
+
+Then, deploy vessel-service to our cluster.
+
+```sh
+$ kubectl create -f ./deployments/vessel-service-deployment.yml
+$ kubectl create -f ./deployments/vessel-service.yml
+```
+
+Do the same for our other services.
+
+**Deploy Micro**
+
+[Deployment](./deployment/micro-deployment.yml) file.
+
+In our service here, we expose an external load balancer, with an IP address out to the public.
+
+Run `$ kubectl get services` to get a public IP address.
+
+After all that's deployed, make a service call to micro container:
+
+```sh
+$ curl localhost/rpc -XPOST -d '{
+    "request": {
+        "name": "test",
+        "capacity": 100,
+        "max_weight": 200000,
+        "available": true
+    },
+    "method": "VesselService.Create",
+    "service": "vessel"
+}' -H 'Content-Type: application/json'
+```
+
+Here, our gRPC services, being proxied and converted to a web friendly format, using a sharded, MongoDB instance.
