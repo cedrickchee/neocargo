@@ -6,8 +6,7 @@ import (
 	"os"
 
 	pb "github.com/haxorbit/neocargo/neocargo-service-vessel/proto/vessel"
-	k8s "github.com/micro/examples/kubernetes/go/micro"
-	"github.com/micro/go-micro"
+	"github.com/micro/go-micro/v2"
 )
 
 const (
@@ -16,12 +15,8 @@ const (
 
 func main() {
 
-	// Set up Micro instance
-	//
-	// k8s is Micro on Kubernetes lib. This lib configured with a sensible set
-	// of defaults for Kubernetes, and a service selector which integrates
-	// directly on-top of Kubernetes services.
-	service := k8s.NewService(
+	// Set up micro instance
+	service := micro.NewService(
 		micro.Name("neocargo.service.vessel"),
 	)
 
