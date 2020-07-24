@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: shipment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: shipment
+  template:
+    metadata:
+      labels:
+        app: shipment
+    spec:
+        containers:
+        - name: shipment-service
+          image: asia.gcr.io/neocargo/shipment:latest
+          imagePullPolicy: Always
+          command: [
+            "./neocargo-shipment-service",
+            "--selector=static",
+            "--server_address=:8080"
+          ]
+          env:
+          - name: DB_HOST
+            value: "mongo:27017"
+          - name: UPDATED_AT
+            value: "Sat 25 Jul 2020 1:21:00 SGT"
+          ports:
+          - containerPort: 8080
+            name: cons-port
