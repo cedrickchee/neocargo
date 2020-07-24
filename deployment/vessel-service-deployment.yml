@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vessel
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: vessel
+  template:
+    metadata:
+      labels:
+        app: vessel
+    spec:
+        containers:
+        - name: vessel-service
+          image: asia.gcr.io/neocargo/vessel-service:latest
+          imagePullPolicy: Always
+          command: [
+            "./neocargo-vessel-service",
+            "--selector=static",
+            "--server_address=:8080",
+          ]
+          env:
+          - name: DB_HOST
+            value: "mongo:27017"
+          - name: UPDATED_AT
+            value: "Sat 25 Jul 2020 1:08:00 SGT"
+          ports:
+          - containerPort: 8080
+            name: vessel-port
