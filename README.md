@@ -1,14 +1,14 @@
-# Shippy Microservices in Go
+# neoCargo Microservices in Go
 
-Shippy is a shipping container management platform.
+neoCargo is a shipping container management platform.
 
 This project is an example of multiple microservices implementation in Go in a monorepo.
 
-The Shippy backend consists of 3 microservices:
+The neoCargo backend consists of 3 microservices:
 
-- [Consignments](./shippy-service-consignment)
-- [Vessels](./shippy-service-vessel)
-- [Users](./shippy-service-user)
+- [Consignments](./neocargo-service-consignment)
+- [Vessels](./neocargo-service-vessel)
+- [Users](./neocargo-service-user)
 - Authentication
 
 ## Tech Stack

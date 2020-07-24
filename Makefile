@@ -33,7 +33,7 @@ run: ## Run stack with Docker Compose
 
 run-cli: ## Run the consignment CLI tool
 	docker-compose run cli \
-		./shippy-cli-consignment \
+		./neocargo-cli-consignment \
 		consignment.json \
 		eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9.TJVA95OrM7E2cBab30RMHrHDcEfxjoYZgeFONFh7HgQ
 

@@ -5,7 +5,7 @@ services:
   # Services
   consignment:
     restart: always
-    build: ./shippy-service-consignment
+    build: ./neocargo-service-consignment
     depends_on:
       - datastore
       - vessel
@@ -18,7 +18,7 @@ services:
 
   vessel:
     restart: always
-    build: ./shippy-service-vessel
+    build: ./neocargo-service-vessel
     depends_on:
       - datastore
     ports:
@@ -29,7 +29,7 @@ services:
       - config.env
 
   user:
-    build: ./shippy-service-user
+    build: ./neocargo-service-user
     depends_on:
       - database
     ports:
@@ -42,13 +42,13 @@ services:
 
   # Commands
   cli:
-    build: ./shippy-cli-consignment
+    build: ./neocargo-cli-consignment
     depends_on:
       - datastore
       - consignment
 
   user-cli:
-    build: ./shippy-cli-user
+    build: ./neocargo-cli-user
     depends_on:
       - database
       - user
@@ -73,6 +73,6 @@ services:
     environment:
       POSTGRES_PASSWORD: "password"
       POSTGRES_USER: "postgres"
-      POSTGRES_DB: "shippy"
+      POSTGRES_DB: "neocargo"
     ports:
       - 5432:5432
