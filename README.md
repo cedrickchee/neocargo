@@ -1,4 +1,4 @@
-# neoCargo Microservices in Go
+# 🚢 neoCargo Microservices in Go
 
 neoCargo is a shipping container management platform.
 
