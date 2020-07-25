@@ -5,7 +5,7 @@ package main
 import (
 	"context"
 
-	pb "github.com/haxorbit/neocargo/neocargo-service-user/proto/user"
+	pb "github.com/cedrickchee/neocargo/neocargo-service-user/proto/user"
 	"github.com/jmoiron/sqlx"
 	uuid "github.com/satori/go.uuid"
 )

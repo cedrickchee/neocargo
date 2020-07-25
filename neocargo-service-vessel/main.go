@@ -5,7 +5,7 @@ import (
 	"log"
 	"os"
 
-	pb "github.com/haxorbit/neocargo/neocargo-service-vessel/proto/vessel"
+	pb "github.com/cedrickchee/neocargo/neocargo-service-vessel/proto/vessel"
 	"github.com/micro/go-micro/v2"
 )
 

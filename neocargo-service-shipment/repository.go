@@ -6,7 +6,7 @@ import (
 	"context"
 	"log"
 
-	pb "github.com/haxorbit/neocargo/neocargo-service-shipment/proto/shipment"
+	pb "github.com/cedrickchee/neocargo/neocargo-service-shipment/proto/shipment"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
 )

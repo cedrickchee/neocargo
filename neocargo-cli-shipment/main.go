@@ -9,7 +9,7 @@ import (
 
 	"context"
 
-	pb "github.com/haxorbit/neocargo/neocargo-service-shipment/proto/shipment"
+	pb "github.com/cedrickchee/neocargo/neocargo-service-shipment/proto/shipment"
 
 	micro "github.com/micro/go-micro/v2"
 	"github.com/micro/go-micro/v2/metadata"

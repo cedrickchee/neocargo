@@ -6,7 +6,7 @@ import (
 	"time"
 
 	"github.com/dgrijalva/jwt-go"
-	pb "github.com/haxorbit/neocargo/neocargo-service-user/proto/user"
+	pb "github.com/cedrickchee/neocargo/neocargo-service-user/proto/user"
 )
 
 var (

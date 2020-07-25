@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"log"
 
-	pb "github.com/haxorbit/neocargo/neocargo-service-user/proto/user"
+	pb "github.com/cedrickchee/neocargo/neocargo-service-user/proto/user"
 
 	"github.com/micro/cli/v2"
 	micro "github.com/micro/go-micro/v2"

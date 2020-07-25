@@ -6,9 +6,9 @@ import (
 	"os"
 
 	// Import the generated protobuf code
-	pb "github.com/haxorbit/neocargo/neocargo-service-shipment/proto/shipment"
-	userProto "github.com/haxorbit/neocargo/neocargo-service-user/proto/user"
-	vesselProto "github.com/haxorbit/neocargo/neocargo-service-vessel/proto/vessel"
+	pb "github.com/cedrickchee/neocargo/neocargo-service-shipment/proto/shipment"
+	userProto "github.com/cedrickchee/neocargo/neocargo-service-user/proto/user"
+	vesselProto "github.com/cedrickchee/neocargo/neocargo-service-vessel/proto/vessel"
 	"github.com/pkg/errors"
 
 	"github.com/micro/go-micro/v2"

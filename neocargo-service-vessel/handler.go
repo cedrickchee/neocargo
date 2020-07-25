@@ -6,7 +6,7 @@ import (
 	"context"
 	"log"
 
-	pb "github.com/haxorbit/neocargo/neocargo-service-vessel/proto/vessel"
+	pb "github.com/cedrickchee/neocargo/neocargo-service-vessel/proto/vessel"
 )
 
 // Handler should implement all of the methods to satisfy the service

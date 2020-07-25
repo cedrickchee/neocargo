@@ -5,7 +5,7 @@ package main
 import (
 	"context"
 
-	pb "github.com/haxorbit/neocargo/neocargo-service-vessel/proto/vessel"
+	pb "github.com/cedrickchee/neocargo/neocargo-service-vessel/proto/vessel"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
 )

@@ -30,4 +30,4 @@ run: ## Run the container
 		neocargo-service-user
 
 test: ## Run test suite
-	go test -v -timeout 30s github.com/haxorbit/neocargo/neocargo-service-user
+	go test -v -timeout 30s github.com/cedrickchee/neocargo/neocargo-service-user

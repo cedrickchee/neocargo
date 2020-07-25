@@ -15,9 +15,9 @@ ARG GITHUB_TOKEN
 
 ENV GO111MODULE=on
 # Required to access go mod from private neocargo repo
-ENV GOPRIVATE github.com/haxorbit/neocargo
+ENV GOPRIVATE github.com/cedrickchee/neocargo
 
-RUN git config --global url."https://${GITHUB_TOKEN}:x-oauth-basic@github.com/haxorbit/".insteadOf "https://github.com/haxorbit/"
+RUN git config --global url."https://${GITHUB_TOKEN}:x-oauth-basic@github.com/cedrickchee/".insteadOf "https://github.com/cedrickchee/"
 
 COPY . .
 

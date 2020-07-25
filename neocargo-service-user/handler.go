@@ -6,7 +6,7 @@ import (
 	"context"
 	"errors"
 
-	pb "github.com/haxorbit/neocargo/neocargo-service-user/proto/user"
+	pb "github.com/cedrickchee/neocargo/neocargo-service-user/proto/user"
 	"golang.org/x/crypto/bcrypt"
 )
 

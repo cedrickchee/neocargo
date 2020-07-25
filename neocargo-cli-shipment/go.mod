@@ -1,8 +1,8 @@
-module github.com/haxorbit/neocargo/neocargo-cli-shipment
+module github.com/cedrickchee/neocargo/neocargo-cli-shipment
 
 go 1.14
 
-// replace github.com/haxorbit/neocargo/neocargo-service-shipment => ../neocargo-service-shipment
+// replace github.com/cedrickchee/neocargo/neocargo-service-shipment => ../neocargo-service-shipment
 
 // Fix etcd dependency error
 replace google.golang.org/grpc => google.golang.org/grpc v1.26.0

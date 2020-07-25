@@ -1,4 +1,4 @@
-module github.com/haxorbit/neocargo/neocargo-service-vessel
+module github.com/cedrickchee/neocargo/neocargo-service-vessel
 
 go 1.14
 

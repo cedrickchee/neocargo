@@ -1,9 +1,9 @@
-module github.com/haxorbit/neocargo/neocargo-service-shipment
+module github.com/cedrickchee/neocargo/neocargo-service-shipment
 
 go 1.14
 
-// replace github.com/haxorbit/neocargo/neocargo-service-vessel => ../neocargo-service-vessel
-// replace github.com/haxorbit/neocargo/neocargo-service-user => ../neocargo-service-user
+// replace github.com/cedrickchee/neocargo/neocargo-service-vessel => ../neocargo-service-vessel
+// replace github.com/cedrickchee/neocargo/neocargo-service-user => ../neocargo-service-user
 
 replace google.golang.org/grpc => google.golang.org/grpc v1.26.0
 

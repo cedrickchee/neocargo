@@ -6,8 +6,8 @@ import (
 	"context"
 	"log"
 
-	pb "github.com/haxorbit/neocargo/neocargo-service-shipment/proto/shipment"
-	vesselProto "github.com/haxorbit/neocargo/neocargo-service-vessel/proto/vessel"
+	pb "github.com/cedrickchee/neocargo/neocargo-service-shipment/proto/shipment"
+	vesselProto "github.com/cedrickchee/neocargo/neocargo-service-vessel/proto/vessel"
 	"github.com/pkg/errors"
 )
 

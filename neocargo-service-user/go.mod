@@ -1,4 +1,4 @@
-module github.com/haxorbit/neocargo/neocargo-service-user
+module github.com/cedrickchee/neocargo/neocargo-service-user
 
 go 1.14
 
