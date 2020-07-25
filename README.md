@@ -221,18 +221,17 @@ make: *** [Makefile:41: run-user-cli] Error 1
 
 ### Deployment
 
-(_Work in progress_)
-
-#### Terraform
+#### Terraform a Cluster on Google Cloud
 
 We will create a cloud environment to host our services. We will be using
 Terraform to provision and manage our cloud cluster on Google Cloud.
 
 Steps:
 
-- Create your [Google Cloud](http://console.cloud.google.com/) project
-- Modify the configurations in our [Infra-as-Code project](./infra)
-- Move the key you created earlier into the project root and name it `gcp-cred.json`.
+- Create your [Google Cloud](http://console.cloud.google.com/) project.
+- Go to "IAM & Admin" tab in Google Cloud console and [create a new service account key](https://cloud.google.com/iam/docs/creating-managing-service-account-keys). Make sure you select "JSON" for "Key type".
+- Modify the configurations in our [Infra-as-Code project](./infra).
+- Move the service key you created earlier into the project root and name it `gcloud-service-key.json`.
 
 Next, create a new cluster:
 
@@ -250,8 +249,6 @@ Once it's done, see your new cluster. Go to Google Cloud console and look for Ku
 Next, deploy our containers to the cluster.
 
 #### Google Kubernetes Engine (GKE)
-
-(_Work in progress_)
 
 Set-up and deploy containers into cluster using GKE.
 
