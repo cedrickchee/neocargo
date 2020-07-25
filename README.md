@@ -2,7 +2,9 @@
 
 neoCargo is a shipping container management platform.
 
-This project is an example of multiple microservices implementation in Go in a monorepo.
+This project is an example of multiple microservices implementation in Go in a [**monorepo**](https://en.wikipedia.org/wiki/Monorepo).
+
+(_Demo ([asciinema](https://asciinema.org/) coming soon._)
 
 The neoCargo backend consists of 3 microservices:
 
@@ -15,18 +17,18 @@ The neoCargo backend consists of 3 microservices:
 - [Protocol Buffers](https://developers.google.com/protocol-buffers) and [gRPC](https://grpc.io/) as transport protocol
 - [go-micro](https://micro.mu/)
 - Docker container ([Alpine Linux](https://alpinelinux.org/about/) as base image)
-- Docker Compose
+- [Docker Compose](https://docs.docker.com/compose/)
 - PostgreSQL or MongoDB database
-- User authentication with JWT
-- Google Cloud
-- Kubernetes
+- User authentication with [JWT](https://jwt.io/)
+- [Google Cloud](https://cloud.google.com/)
+- [Kubernetes](https://kubernetes.io/)
 - [NATS](https://nats.io/)
-- CircleCI
+- [CircleCI](https://circleci.com/)
 - [Terraform](https://www.terraform.io/)
 
 ## System Architecture
 
-(_Work in progress_)
+(_Note: incomplete._)
 
 A good architecture is when services are decoupled. We will achieve that with
 event driven architecture or pubsub.
