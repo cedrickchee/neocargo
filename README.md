@@ -324,3 +324,23 @@ $ curl localhost/rpc -XPOST -d '{
 ```
 
 Here, our gRPC services, being proxied and converted to a web friendly format, using a sharded, MongoDB instance.
+
+### Continuous Integration (CI)
+
+We will set up all of this into a CI process to manage our deployments.
+
+**Set up CircleCI with our services**
+
+First, sign-up and create a new project in CircleCI.
+
+Next, change your build configuration (let's use our shipment-service for this).
+
+Open [shipment-service build configuration](./neocargo-service-shipment/.circleci/config.yml)
+in your editor. In order to make this work, we need Google Cloud service account
+key, such as the one we created in ["Deployment" section](#Deployment) of this
+README, and we need to encode this into base64 and store it as an environment
+variable within our CircleCI build project settings. You can read more about
+environment variables and how to use them on [CircleCI 2.0 here](https://circleci.com/docs/2.0/env-vars/).
+
+That's it. We have CI for one of our services. For a production-grade service,
+I recommend you run your tests first, before your deploy step.
