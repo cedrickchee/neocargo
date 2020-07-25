@@ -4,7 +4,9 @@ neoCargo is a shipping container management platform.
 
 This project is an example of multiple microservices implementation in Go in a [**monorepo**](https://en.wikipedia.org/wiki/Monorepo).
 
-(_Demo ([asciinema](https://asciinema.org/) coming soon._)
+(_Demo ([asciinema](https://asciinema.org/)) coming soon._)
+
+The project main focus is tech proof of concept (POC). So, for that purpose, we try to keep the code simple.
 
 The neoCargo backend consists of 3 microservices:
 
@@ -12,11 +14,31 @@ The neoCargo backend consists of 3 microservices:
 - [Vessels](./neocargo-service-vessel)
 - [Users + Authentication](./neocargo-service-user)
 
+## Docs
+
+<details>
+
+<summary><b>Getting Started</b></summary>
+
+- [Tech Stack](#tech-stack)
+- [System Architecture](#system-architecture)
+- [Prerequisite](#prerequisite)
+- [Usage](#usage)
+    + [Installation](#installation)
+    + [Local Development](#local-development)
+    + [Testing](#testing)
+- [Deployment](#deployment)
+    + [Terraform a Cluster on Google Cloud](#terraform-a-cluster-on-google-cloud)
+    + [Continuous Integration (CI) Pipeline](#continuous-integration-ci-pipeline)
+</details>
+
+---
+
 ## Tech Stack
 
 - [Protocol Buffers](https://developers.google.com/protocol-buffers) and [gRPC](https://grpc.io/) as transport protocol
 - [go-micro](https://micro.mu/)
-- Docker container ([Alpine Linux](https://alpinelinux.org/about/) as base image)
+- Docker container ([Alpine Linux](https://alpinelinux.org/about/) as base image) - smaller image with multi-stage build
 - [Docker Compose](https://docs.docker.com/compose/)
 - PostgreSQL or MongoDB database
 - User authentication with [JWT](https://jwt.io/)
@@ -221,9 +243,9 @@ Created user. Response:
 make: *** [Makefile:41: run-user-cli] Error 1
 ```
 
-### Deployment
+## Deployment
 
-#### Terraform a Cluster on Google Cloud
+### Terraform a Cluster on Google Cloud
 
 We will create a cloud environment to host our services. We will be using
 Terraform to provision and manage our cloud cluster on Google Cloud.
@@ -327,7 +349,7 @@ $ curl localhost/rpc -XPOST -d '{
 
 Here, our gRPC services, being proxied and converted to a web friendly format, using a sharded, MongoDB instance.
 
-### Continuous Integration (CI)
+### Continuous Integration (CI) Pipeline
 
 We will set up all of this into a CI process to manage our deployments.
 
