@@ -19,7 +19,7 @@ help:
 
 # Build the containers
 build: ## Build stack with Docker Compose
-	docker-compose build --build-arg GITHUB_TOKEN=${GITHUB_TOKEN}
+	docker-compose build
 
 build-user: ## Build single user container
 	docker-compose build user

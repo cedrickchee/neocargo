@@ -11,13 +11,7 @@ RUN apk update && apk upgrade && \
 RUN mkdir /app
 WORKDIR /app
 
-ARG GITHUB_TOKEN
-
 ENV GO111MODULE=on
-# Required to access go mod from private neocargo repo
-ENV GOPRIVATE github.com/cedrickchee/neocargo
-
-RUN git config --global url."https://${GITHUB_TOKEN}:x-oauth-basic@github.com/cedrickchee/".insteadOf "https://github.com/cedrickchee/"
 
 COPY . .
 
